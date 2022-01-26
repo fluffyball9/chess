@@ -759,31 +759,33 @@ public class Chess extends JPanel implements MouseListener, KeyListener {
 				}
 			}
 		}
-		for (Pieces current : pieces) {
-			if (current instanceof King && piece.black != current.black) {
-				if (checkCheck(current.coordinates, current.black)) {
-					check = current;
-					boolean checkmateThis = true;
-					List<int[]> list = getMoves(current);
-					for (int[] check : list) {
-						if (!checkCheck((check[0] / 60 + 1) * 10 + (check[1] / 60 + 1), current.black)) {
-							checkmateThis = false;
-							break;
+		if (piece.coordinates == xy) {
+			for (Pieces current : pieces) {
+				if (current instanceof King && piece.black != current.black) {
+					if (checkCheck(current.coordinates, current.black)) {
+						check = current;
+						boolean checkmateThis = true;
+						List<int[]> list = getMoves(current);
+						for (int[] check : list) {
+							if (!checkCheck((check[0] / 60 + 1) * 10 + (check[1] / 60 + 1), current.black)) {
+								checkmateThis = false;
+								break;
+							}
 						}
-					}
-					for (Pieces check : new ArrayList<Pieces>(pieces)) {
-						if ((!getMoves(check).isEmpty()) && check.black == this.check.black) {
-							checkmateThis = false;
-							break;
+						for (Pieces check : new ArrayList<Pieces>(pieces)) {
+							if ((!getMoves(check).isEmpty()) && check.black == this.check.black) {
+								checkmateThis = false;
+								break;
+							}
 						}
+						if (checkmateThis) {
+							checkmate = current.black;
+						}
+					} else {
+						check = null;
 					}
-					if (checkmateThis) {
-						checkmate = current.black;
-					}
-				} else {
-					check = null;
+					break;
 				}
-				break;
 			}
 		}
 		this.repaint();
