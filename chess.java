@@ -1,3 +1,11 @@
+import java.util.*;
+import javax.swing.*;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.event.*;
+import java.awt.Dimension;
+import java.io.File;
+
 public class Chess extends JPanel implements MouseListener, KeyListener {
 	private static final long serialVersionUID = -7058791324695713647L;
 	/**
@@ -285,9 +293,8 @@ public class Chess extends JPanel implements MouseListener, KeyListener {
 	 * Creates a new Chessboard
 	 * 
 	 * @param args
-	 * @throws IOException
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		new Chess();
 	}
 
@@ -691,9 +698,12 @@ public class Chess extends JPanel implements MouseListener, KeyListener {
 	/**
 	 * Sets up the Chessboard
 	 * 
-	 * @throws IOException
 	 */
 	private void setup() {
+		if(!new File("Chessboard.png").exists()) {
+			JOptionPane.showMessageDialog(null, "Error, Chessboard.png does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
+		}
 		pieces.add(new Rook(true, 11));
 		pieces.add(new Rook(true, 81));
 		pieces.add(new Rook(false, 18));
@@ -715,6 +725,10 @@ public class Chess extends JPanel implements MouseListener, KeyListener {
 			pieces.add(new Pawn(false, i * 10 + 7));
 		}
 		for (Pieces piece : pieces) {
+			if(!new File(piece.toString() + ".png").exists()) {
+				JOptionPane.showMessageDialog(null, "Error, " + piece.toString() + ".png" + " does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+				System.exit(0);
+			}
 			images.put(piece.toString(), new ImageIcon(piece.toString() + ".png"));
 		}
 	}
@@ -862,5 +876,29 @@ public class Chess extends JPanel implements MouseListener, KeyListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
 	}
 }
