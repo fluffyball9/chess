@@ -700,8 +700,9 @@ public class Chess extends JPanel implements MouseListener, KeyListener {
 	 * 
 	 */
 	private void setup() {
-		if(!new File("Chessboard.png").exists()) {
-			JOptionPane.showMessageDialog(null, "Error, Chessboard.png does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+		if (!new File("./Chessboard.png").exists()) {
+			JOptionPane.showMessageDialog(null, "Error, Chessboard.png does not exist", "Error",
+					JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
 		pieces.add(new Rook(true, 11));
@@ -725,8 +726,9 @@ public class Chess extends JPanel implements MouseListener, KeyListener {
 			pieces.add(new Pawn(false, i * 10 + 7));
 		}
 		for (Pieces piece : pieces) {
-			if(!new File(piece.toString() + ".png").exists()) {
-				JOptionPane.showMessageDialog(null, "Error, " + piece.toString() + ".png" + " does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+			if (!new File("./" + piece.toString() + ".png").exists()) {
+				JOptionPane.showMessageDialog(null, "Error, " + piece.toString() + ".png" + " does not exist", "Error",
+						JOptionPane.ERROR_MESSAGE);
 				System.exit(0);
 			}
 			images.put(piece.toString(), new ImageIcon(piece.toString() + ".png"));
